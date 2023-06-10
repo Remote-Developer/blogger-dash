@@ -2,9 +2,11 @@
 import axios from "@/lib/axios";
 import { useState } from "react";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import GetSection from "./getSection";
 const languagesData = ["Python", "Javascript", "Go", "C++", "C#", "C"];
 
 export default function SectionsPage() {
+  const [getData, setGetData] = useState<any>([]);
   const [data, setData] = useState({
     topic: "Python",
     order: 0,
@@ -24,6 +26,9 @@ export default function SectionsPage() {
       name: `${data.topic} ${data.name}`,
       order: Number(data.order),
     });
+    if(response.status == 201){
+      setGetData([...getData, (response as any).data?.data])
+    }
     console.log(response);
   };
   return (
@@ -78,7 +83,9 @@ export default function SectionsPage() {
           </button>
         </div>
       </form>
-      <div className="col-span-4"></div>
+      <div className="col-span-4">
+       <GetSection data={getData} setData={setGetData} />
+      </div>
     </div>
   );
 }
