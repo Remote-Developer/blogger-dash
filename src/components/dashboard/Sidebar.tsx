@@ -1,8 +1,9 @@
 import React from 'react'
 import { BsMicrosoftTeams } from 'react-icons/bs';
 import { AiTwotoneHome, AiTwotoneSetting } from 'react-icons/ai';
-import { IoPeople } from 'react-icons/io5';
+import { IoPeople ,IoExitSharp} from 'react-icons/io5';
 import { FaGraduationCap } from 'react-icons/fa';
+ 
 
 
 import Link from 'next/link';
@@ -22,6 +23,7 @@ const Sidebar = () => {
                     </div>
                 </div>
 
+{/* sidebar links here */}
                 <hr className='mx-4' />
                 <div className='my-3 '>
                     <ul className='text-white mx-4 mb-2 my-0 '>
@@ -41,9 +43,15 @@ const Sidebar = () => {
 
                         <Link className='text-white flex  gap-x-2 items-center hover:text-gray-300  hover:bg-slate-800 px-7 py-2 rounded-md' href="#"> <AiTwotoneSetting /> Settings</Link>
                     </ul>
-
-
                 </div>
+
+                <hr className='mx-4' />
+
+
+            <div className='flex justify-center '>    
+                <button className='flex items-center gap-x-4 bg-blue-950 px-8 py-2 mt-4'> <IoExitSharp size={20} />Exit</button>
+            </div>
+
             </div>
         </div>
     )
