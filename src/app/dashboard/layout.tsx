@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     return (
         <div>
          <div className="grid grid-cols-12 gap-x-6">
-         <div className="col-span-2 bg-slate-950 h-screen">
+         <div className="col-span-2 bg-slate-950  h-screen">
                 <Sidebar/>
             </div>
             <div className="col-span-10">

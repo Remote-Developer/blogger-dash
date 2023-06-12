@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 const Sidebar = () => {
     return (
-        <div className=' '>
+        <div className='fixed h-full  '>
             <div>
                 <h2 className='text-2xl font-medium text-center py-3'> <span className='bg-orange-500 rounded-lg pl-2   '>Boo</span>sto Docx</h2>
                 <div className=' flex justify-center '>
