@@ -1,7 +1,10 @@
+import Home_dashboard from "@/components/dashboard/Home_dashboard";
 import RootLayout from "../layout";
 
 export default function Page() {
     return (
-        <h1>Hello dashboard</h1>
+        <div>
+            <Home_dashboard />
+        </div>
     )
 }
