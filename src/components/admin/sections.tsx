@@ -26,8 +26,8 @@ export default function SectionsPage() {
       name: `${data.topic} ${data.name}`,
       order: Number(data.order),
     });
-    if(response.status == 201){
-      setGetData([...getData, (response as any).data?.data])
+    if (response.status == 201) {
+      setGetData([...getData, (response as any).data?.data]);
     }
     console.log(response);
   };
@@ -84,7 +84,7 @@ export default function SectionsPage() {
         </div>
       </form>
       <div className="col-span-4">
-       <GetSection data={getData} setData={setGetData} />
+        <GetSection data={getData} setData={setGetData} />
       </div>
     </div>
   );
