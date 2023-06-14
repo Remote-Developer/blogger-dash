@@ -8,6 +8,7 @@ import { BsFiletypeDoc, BsFillSignIntersectionFill } from "react-icons/bs";
 import { SiReacthookform } from "react-icons/si";
 import { CgProfile } from "react-icons/cg";
 import { IconType } from "react-icons";
+import { FaFileCsv } from "react-icons/fa";
 
 type Sidebar = {
   icon: IconType;
@@ -29,6 +30,11 @@ export const sidebar: Sidebar = [
     icon: BsFiletypeDoc,
     name: "New Doc",
     link: "new-doc",
+  },
+  {
+    icon: FaFileCsv,
+    name: "docs",
+    link: "docs",
   },
   {
     icon: AiOutlineBarChart,
