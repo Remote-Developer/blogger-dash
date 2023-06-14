@@ -1,6 +1,6 @@
 "use client";
 import axios from "@/lib/axios";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import GetSection from "./getSection";
 const languagesData = ["Python", "Javascript", "Go", "C++", "C#", "C"];
@@ -12,10 +12,10 @@ export default function SectionsPage() {
     order: 0,
     name: "",
   });
-  const handleFieldsChange = (e: any) => {
+  const handleFieldsChange = (e: FormEvent<HTMLInputElement>): void => {
     setData({
       ...data,
-      [e.target.name]: e.target.value,
+      [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
@@ -41,7 +41,7 @@ export default function SectionsPage() {
           <div className="grid grid-cols-2 gap-4">
             <select
               required
-              onChange={handleFieldsChange}
+              onChange={handleFieldsChange as any}
               className="bg-dark py-2 px-3 outline-none border-2 border-emerald-700 text-emerald-600 text-md placeholder:text-emerald-800"
               name="topic"
               value={data.topic}
