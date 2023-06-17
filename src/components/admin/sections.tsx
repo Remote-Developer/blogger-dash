@@ -2,7 +2,7 @@
 import axios from "@/lib/axios";
 import { useState } from "react";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
-import { LuLoader2 } from "react-icons/lu";
+import { ImSpinner10 } from "react-icons/im";
 import GetSection from "./getSection";
 const languagesData = ["Python", "Javascript", "Go", "C++", "C#", "C"];
 import toast, { Toaster } from 'react-hot-toast';
@@ -113,7 +113,7 @@ export default function SectionsPage() {
               type="submit"
               className="py-4 px-4   text-gray-200 rounded border-2 border-gray-200 hover:text-emerald-700"
             >
-            <LuLoader2/>
+            <ImSpinner10/>
             </button>}
         </div>
       </form>

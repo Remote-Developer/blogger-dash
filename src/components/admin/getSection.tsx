@@ -1,7 +1,7 @@
 import axiosInstance from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { BiLoaderAlt } from "react-icons/bi";
+import { ImSpinner10 } from "react-icons/im";
 import toast, { Toaster } from 'react-hot-toast';
 
 const GetSection = ({ data, setData }: any) => {
@@ -32,6 +32,7 @@ const GetSection = ({ data, setData }: any) => {
     const getDataByTopic = await axiosInstance(`/api/v1/sections?lang=${value}`)
     setData(getDataByTopic?.data.data)
     setLoadingByTopic(false)
+    console.log(getDataByTopic?.data.data)
 
   }
 
@@ -103,13 +104,13 @@ const GetSection = ({ data, setData }: any) => {
                 position="top-right"
                 reverseOrder={true}
               />
-              <div onClick={() => handleDelete((sdata as any)._id)} className="float-right text-red-700 cursor-pointer">{!onButton && onId === sdata._id ? <button className="py-4   text-gray-200 rounded border-2 border-gray-200  " disabled={true}>
-                <BiLoaderAlt /></button> : <RiDeleteBin5Line />}</div>
+              <div onClick={() => handleDelete((sdata as any)._id)} className="float-right text-red-700 cursor-pointer">{!onButton && onId === sdata._id ? <button className="bg-dark py-2 px-2 outline-none border-2 border-emerald-700 text-emerald-600 w-full text-md placeholder:text-emerald-800 " disabled={true}>
+                <ImSpinner10 /></button> : <RiDeleteBin5Line />}</div>
               <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 {sdata.name}
               </h5>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {sdata.topic}
+              <span className={`w-[10px] mx-2 h-[10px] ${sdata.isActive?"bg-green-600":'bg-red-600'} rounded-full border-2 z-0 inline-block border-black`}> </span>{sdata.topic}
               </p>
               <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                 {sdata?.documents?.map((st: any, index: any) => (
