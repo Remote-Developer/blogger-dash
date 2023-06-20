@@ -49,7 +49,9 @@ export default function MarkdownTextarea({
   };
   return (
     <div>
-      <div className="h-10 p-2 mt-2 mb-6 border-2 border-amber-600">
+
+        <h4 className="my-2 font-bold text-3xl">Share you pure <span className=" text-sky-700 font-extrabold  ">creativity</span></h4>
+      <div className="  p-2 mt-2 mb-6 border-2 border-amber-600">
         <button
           onClick={() => setFields(!fields)}
           className="shadow shadow-emerald-600 bg-transparent border border-emerald-600 hover:bg-emerald-600 transition duration-200 mr-2"
@@ -70,17 +72,22 @@ export default function MarkdownTextarea({
           Submit
         </button>
       </div>
-      {fields && (
-        <div>
-          <fieldset className="mb-6">
-            {/* Section or Doc sort Name */}
-            <input
+
+<div className={`${!fields? "flex":"block"}`}>
+
+  
+  {fields && (
+        <div >
+          <fieldset className="mb-6 px-2">
+           <div className="flex gap-x-2">
+             {/* Section or Doc sort Name */}
+             <input
               required
               name="name"
               value={name}
               onChange={handleFieldChange}
               type="text"
-              className="border-2 border-x-transparent border-gray-700 w-full py-1 px-2 rounded bg-black focus:underline-none focus:border-gray-500"
+              className="border-2 outline-none border-sky-600 w-full py-1 px-2  rounded-md bg-slate-950  focus:underline-none focus:border-sky-400"
               placeholder="Doc sort Name"
             />
             {/* Select languages */}
@@ -89,7 +96,7 @@ export default function MarkdownTextarea({
               onChange={handleFieldChange}
               name="topic"
               value={topic}
-              className="border-2 border-x-transparent border-gray-700 w-full py-2 px-2 rounded bg-black focus:underline-none focus:border-gray-500"
+              className="border-2 outline-none border-sky-600 w-full py-1 px-2  rounded-md bg-slate-950  focus:underline-none focus:border-sky-400 "
             >
               <option className="py-2" value="Python">
                 Python
@@ -113,9 +120,10 @@ export default function MarkdownTextarea({
                 C
               </option>
             </select>
+           </div>
           </fieldset>
           {/* SEO */}
-          <fieldset className="mb-6 pb-0">
+          <fieldset className="mb-6 pb-0 px-2">
             <input
               required
               type="text"
@@ -123,7 +131,16 @@ export default function MarkdownTextarea({
               value={meta_title}
               onChange={handleFieldChange}
               placeholder="Enter you meta title"
-              className="border-2 border-x-transparent border-gray-700 w-full py-1 px-2 rounded bg-black focus:underline-none focus:border-gray-500"
+              className="border-2 outline-none border-sky-600 w-full py-1 px-2  rounded-md bg-slate-950  focus:underline-none focus:border-sky-400 "
+            />
+            <input
+              required
+              type="text"
+              name="slug"
+              value={meta_title}
+              onChange={handleFieldChange}
+              placeholder="Enter you slug ID"
+              className="border-2 outline-none border-sky-600 w-full py-1 px-2  rounded-md bg-slate-950  focus:underline-none focus:border-sky-400 "
             />
             <textarea
               required
@@ -132,7 +149,7 @@ export default function MarkdownTextarea({
               rows={5}
               onChange={handleFieldChange}
               placeholder="Enter you meta description"
-              className="border-2 border-x-transparent border-gray-700 w-full py-1 px-2 rounded bg-black focus:underline-none focus:border-gray-500"
+              className="border-2 outline-none border-sky-600 w-full py-1 px-2  rounded-md bg-slate-950  focus:underline-none focus:border-sky-400 "
             ></textarea>
             <textarea
               required
@@ -141,20 +158,31 @@ export default function MarkdownTextarea({
               rows={5}
               onChange={handleFieldChange}
               placeholder="Enter you meta keywords"
-              className="border-2 border-x-transparent border-gray-700 w-full py-1 px-2 rounded bg-black focus:underline-none focus:border-gray-500"
+              className="border-2 outline-none border-sky-600 w-full py-1 px-2  rounded-md bg-slate-950  focus:underline-none focus:border-sky-400 "
             ></textarea>
           </fieldset>
         </div>
       )}
+
+
+
+
       {/* markdown writer */}
       {!preview && (
         <TextareaAutosize
-          className="textbox py-3 px-2 min-h-[300px] w-full bg-[#333] border-2 border-transparent hover:border-[#666] text-lg focus:outline-none"
+          className="textbox py-3 px-2 min-h-[300px] w-full bg-[#333] border-2   hover:border-[#666] text-lg focus:outline-none"
           value={markdownContent}
           onChange={handleChange}
           placeholder="Start typing your Markdown here..."
         />
       )}
+  
+  
+</div>
+
+   
+
+
     </div>
   );
 }
