@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 import axiosInstance from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -8,6 +10,8 @@ const GetSection = ({ data, setData }: any) => {
   const [onButton, setOnButton] = useState<boolean>(true)
   const [onId, setOnId] = useState<string>("")
   const [loadingByTopic, setLoadingByTopic] = useState<any>(false)
+  const [loadDefault, setLoadDefault] = useState(false)
+
 
 
   // const getData = async () => {
@@ -22,18 +26,33 @@ const GetSection = ({ data, setData }: any) => {
 
 
 
+  // find by select tag with default value
+  const findByDefault = async () => {
+    setLoadingByTopic(true)
+    const value = "python"
+    const getDataByTopic = await axiosInstance(`/api/v1/sections?lang=${value}`)
+    setData(getDataByTopic?.data.data)
+    setLoadingByTopic(false)
+    if (!getDataByTopic) {
+      setLoadDefault(true)
+    }
+    console.log(getDataByTopic?.data.data)
 
+  }
+
+  useEffect(() => {
+    findByDefault()
+  }, [])
 
 
   // find by select tag
   const findWithTopic = async (e: any) => {
     setLoadingByTopic(true)
-    const value = e.target.value;
+    const value = e.target.value
     const getDataByTopic = await axiosInstance(`/api/v1/sections?lang=${value}`)
     setData(getDataByTopic?.data.data)
     setLoadingByTopic(false)
     console.log(getDataByTopic?.data.data)
-
   }
 
 
@@ -56,9 +75,6 @@ const GetSection = ({ data, setData }: any) => {
   }
 
 
-
-
-
   return (
     <>
 
@@ -77,6 +93,7 @@ const GetSection = ({ data, setData }: any) => {
           <option value="php">PHP</option>
         </select>
       </div>
+   
       {loadingByTopic ?
         <div className="flex justify-center my-5">
           <div className="border-4  border-white shadow rounded-md p-4 max-w-sm w-full mx-auto">
@@ -95,8 +112,8 @@ const GetSection = ({ data, setData }: any) => {
             </div>
           </div>
         </div>
-        : !data.length ? <p className="bg-slate-900 px-4 py-2 text-center mx-auto opacity-50 text-sm text-white font-medium rounded-md my-12 
-        w-6/12">No data found</p> : <div>
+        : loadDefault ? <p className="bg-slate-900 px-4 py-2 text-center mx-auto opacity-50 text-sm text-white font-medium rounded-md my-12 
+        w-6/12">No data found</p>  : <div>
 
           {(data as any)?.map((sdata: any, index: any) => (
             <div key={sdata._id} className="max-w-[400px] mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -110,7 +127,7 @@ const GetSection = ({ data, setData }: any) => {
                 {sdata.name}
               </h5>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-              <span className={`w-[10px] mx-2 h-[10px] ${sdata.isActive?"bg-green-600":'bg-red-600'} rounded-full border-2 z-0 inline-block border-black`}> </span>{sdata.topic}
+                <span className={`w-[10px] mx-2 h-[10px] ${sdata.isActive ? "bg-green-600" : 'bg-red-600'} rounded-full border-2 z-0 inline-block border-black`}> </span>{sdata.topic}
               </p>
               <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                 {sdata?.documents?.map((st: any, index: any) => (
