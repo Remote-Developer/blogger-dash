@@ -1,6 +1,7 @@
 import axios from "@/lib/axios";
-import { useState } from "react";
-import toast, { Toaster } from 'react-hot-toast';
+import { AxiosResponse } from "axios";
+import { useEffect, useState } from "react";
+import toast, { Renderable, Toaster } from 'react-hot-toast';
 import TextareaAutosize from "react-textarea-autosize";
 
 interface PropsTypes {
@@ -28,6 +29,7 @@ export default function MarkdownTextarea({
 }: PropsTypes) {
   const [data, setData] = useState<DataTypes | any>({ topic: "Python" });
   const [fields, setFields] = useState(false);
+  const [postLoad,setPostLoad]=useState(false)
 
   const handleChange = (e: any) => {
     setMarkdownContent(e.target.value);
@@ -44,23 +46,41 @@ export default function MarkdownTextarea({
 
   const { name, meta_title, meta_description, topic, meta_keywords, slug } =
     data || {};
-  const handleSubmitDoc = async (e: any) => {
 
+  const handleSubmitDoc =  (e: any) => {
+  
     if (name&&meta_title&&meta_description&&topic&&meta_keywords&&slug&&markdownContent) {
-      const response = await axios.post("/api/v1/doc", {
-        ...data,
-        content: markdownContent,
-      });
-      if (response.status===201) {
-        toast.success('Successfully Post Markdown!')
-      } else {
-        toast.error("something went wrong")
-      }
+      setPostLoad(true)
+      toast.promise(
+      axios.post("/api/v1/doc", {
+          ...data,
+          content: markdownContent,
+        }),
+        {
+          loading: 'Sending post request...',
+          success: (response: AxiosResponse) => {
+            // Do something with the response if needed
+            setPostLoad(false)
+            return 'Post request successful!';
+            
+          },
+          error: (error) => {
+            console.error(error);
+            setPostLoad(false)
+            return 'Error occurred during post request!';
+          },
+        }
+      );
+
+      
+     
     }else {
       toast.error("Please input data")
     }
 
   };
+
+ 
   return (
     <div>
       <Toaster
@@ -81,13 +101,14 @@ export default function MarkdownTextarea({
         >
           {preview ? "Hide Markdown" : "Preview Markdown"}
         </button>
-        <button
+       <button
           onClick={handleSubmitDoc}
+          disabled={postLoad?true:false}
           className="shadow shadow-sky-600 bg-transparent border border-sky-600 hover:bg-sky-600 transition duration-200 mr-2"
           type="submit"
         >
           Submit
-        </button>
+        </button> 
       </div>
 
       <div className={`${!fields ? "flex" : "block"}`}>
