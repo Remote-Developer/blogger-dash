@@ -71,19 +71,19 @@ export default function MarkdownTextarea({
       <div className="  p-2 mt-2 mb-6 border-2 border-amber-600">
         <button
           onClick={() => setFields(!fields)}
-          className="shadow shadow-emerald-600 bg-transparent border border-emerald-600 hover:bg-emerald-600 transition duration-200 mr-2"
+          className="shadow shadow-sky-600 bg-transparent border border-sky-600 hover:bg-sky-600 transition duration-200 mr-2"
         >
           {fields ? "Hide Fields" : "Show Fields"}
         </button>
         <button
           onClick={() => setPreview(!preview)}
-          className="shadow shadow-emerald-600 bg-transparent border border-emerald-600 hover:bg-emerald-600 transition duration-200 mr-2"
+          className="shadow shadow-sky-600 bg-transparent border border-sky-600 hover:bg-sky-600 transition duration-200 mr-2"
         >
           {preview ? "Hide Markdown" : "Preview Markdown"}
         </button>
         <button
           onClick={handleSubmitDoc}
-          className="shadow shadow-emerald-600 bg-transparent border border-emerald-600 hover:bg-emerald-600 transition duration-200 mr-2"
+          className="shadow shadow-sky-600 bg-transparent border border-sky-600 hover:bg-sky-600 transition duration-200 mr-2"
           type="submit"
         >
           Submit
