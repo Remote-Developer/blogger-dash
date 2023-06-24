@@ -29,7 +29,7 @@ export default function MarkdownTextarea({
 }: PropsTypes) {
   const [data, setData] = useState<DataTypes | any>({ topic: "Python" });
   const [fields, setFields] = useState(false);
-  const [postLoad,setPostLoad]=useState(false)
+  const [postLoad, setPostLoad] = useState(false)
 
   const handleChange = (e: any) => {
     setMarkdownContent(e.target.value);
@@ -47,12 +47,12 @@ export default function MarkdownTextarea({
   const { name, meta_title, meta_description, topic, meta_keywords, slug } =
     data || {};
 
-  const handleSubmitDoc =  (e: any) => {
-  
-    if (name&&meta_title&&meta_description&&topic&&meta_keywords&&slug&&markdownContent) {
+  const handleSubmitDoc = (e: any) => {
+
+    if (name && meta_title && meta_description && topic && meta_keywords && slug && markdownContent) {
       setPostLoad(true)
       toast.promise(
-      axios.post("/api/v1/doc", {
+        axios.post("/api/v1/doc", {
           ...data,
           content: markdownContent,
         }),
@@ -62,7 +62,7 @@ export default function MarkdownTextarea({
             // Do something with the response if needed
             setPostLoad(false)
             return 'Post request successful!';
-            
+
           },
           error: (error) => {
             console.error(error);
@@ -72,15 +72,15 @@ export default function MarkdownTextarea({
         }
       );
 
-      
-     
-    }else {
+
+
+    } else {
       toast.error("Please input data")
     }
 
   };
 
- 
+
   return (
     <div>
       <Toaster
@@ -101,14 +101,14 @@ export default function MarkdownTextarea({
         >
           {preview ? "Hide Markdown" : "Preview Markdown"}
         </button>
-       <button
+        <button
           onClick={handleSubmitDoc}
-          disabled={postLoad?true:false}
+          disabled={postLoad ? true : false}
           className="shadow shadow-sky-600 bg-transparent border border-sky-600 hover:bg-sky-600 transition duration-200 mr-2"
           type="submit"
         >
           Submit
-        </button> 
+        </button>
       </div>
 
       <div className={`${!fields ? "flex" : "block"}`}>

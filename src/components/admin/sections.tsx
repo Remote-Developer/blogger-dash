@@ -6,6 +6,7 @@ import { ImSpinner10 } from "react-icons/im";
 const languagesData = ["Python", "Javascript", "Go", "C++", "C#", "C"];
 import toast, { Toaster } from 'react-hot-toast';
 import GetSection from "./getSection";
+import { AxiosResponse } from "axios";
 
 
 export default function SectionsPage() {
@@ -16,8 +17,8 @@ export default function SectionsPage() {
     order: 0,
     name: "",
   });
- 
- 
+
+
   const handleFieldsChange = (e: FormEvent<HTMLInputElement>): void => {
     setData({
       ...data,
@@ -31,20 +32,28 @@ export default function SectionsPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setOnButton(false)
-    const response = await axios.post(`/api/v1/sections`, {
+
+
+    toast.promise(axios.post(`/api/v1/sections`, {
       topic: data.topic.toLowerCase(),
       name: `${data.topic} ${data.name}`,
-      order: Number(data.order),
-    });
-    if (response.status == 201) {
-      setGetData([...getData, (response as any).data?.data])
-      toast.success('Successfully Post Data!')
-      setOnButton(true)
-    } else {
-      toast.error("Something went wrong!")
-      setOnButton(true)
-      setGetData([...getData, (response as any).data?.data]);
-    }
+      order: Number(data.order)
+    }), {
+      loading: 'Sending post request...',
+      success: (response: AxiosResponse) => {
+        // Do something with the response if needed
+        setOnButton(true)
+        setGetData([...getData, (response as any).data?.data])
+        return 'Post request successful!';
+
+      },
+      error: (error) => {
+        console.error(error);
+        setOnButton(true)
+        setGetData([...getData, (error as any).data?.data]);
+        return 'Error occurred during post request!';
+      },
+    })
 
   };
 
@@ -101,27 +110,20 @@ export default function SectionsPage() {
           />
         </fieldset>
         <div className="col-span-1">
-          {onButton ?
-            <button
-              type="submit"
-              className="py-4 px-4 bg-emerald-700 text-gray-200 rounded border-2 border-gray-200 hover:text-emerald-700 hover:border-emerald-700 hover:bg-emerald-400"
-            >
-              <AiOutlineAppstoreAdd />
-            </button>
 
-            :
-            <button
-              disabled={true}
-              type="submit"
-              className="py-4 px-4   text-gray-200 rounded border-2 border-gray-200 hover:text-emerald-700"
-            >
-            <ImSpinner10/>
-            </button>}
+          <button
+            disabled={onButton ? false : true}
+            type="submit"
+            className="py-4 cursor-pointer px-4 bg-emerald-700 text-gray-200 rounded border-2 border-gray-200 hover:text-emerald-700 hover:border-emerald-700 hover:bg-emerald-400"
+          >
+            <AiOutlineAppstoreAdd />
+          </button>
+
         </div>
       </form>
 
       <div className="col-span-4">
-        <GetSection data={getData} setData={setGetData}   />
+        <GetSection data={getData} setData={setGetData} />
       </div>
     </div>
   );
