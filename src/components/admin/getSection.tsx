@@ -84,7 +84,6 @@ const GetSection = ({ data, setData }: any) => {
             Find by name
           </option>
 
-
           <option value="javascript">Javascript</option>
           <option value="python">Python</option>
           <option value="c#">C#</option>
