@@ -1,5 +1,6 @@
 "use client";
 
+import BlogPost from "@/components/admin/blogPost";
 import Docs from "@/components/admin/docs";
 import PostPage from "@/components/admin/postPage";
 import SectionsPage from "@/components/admin/sections";
@@ -14,6 +15,7 @@ function Page() {
       {tab === "new-doc" && <PostPage />}
       {tab === "sections" && <SectionsPage />}
       {tab === "docs" && <Docs />}
+      {tab === "new-blog" && <BlogPost />}
     </div>
   );
 }
