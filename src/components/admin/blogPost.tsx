@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react'
 import BlogWrightInput from './blogWrightInput';
+import BlogPreview from './blogPreview';
 
 const BlogPost = () => {
 
@@ -11,8 +12,8 @@ const BlogPost = () => {
         >
             <BlogWrightInput
                 markdownContent={markdownContent}
-                setMarkdownContent={setMarkdownContent} setPreview={undefined} preview={false} />
-
+                setMarkdownContent={setMarkdownContent} setPreview={setPreview} preview={preview} />
+            {preview && <BlogPreview markdownContent={markdownContent} />}
         </div>
     )
 }
