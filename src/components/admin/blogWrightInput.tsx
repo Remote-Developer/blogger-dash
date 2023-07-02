@@ -1,6 +1,8 @@
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 import TextareaAutosize from "react-textarea-autosize";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface PropsTypes {
     setMarkdownContent: (arg0: string) => void;
@@ -36,12 +38,13 @@ const BlogWrightInput = ({ markdownContent,
 
                 {/* markdown writer */}
                 {!preview && (
-                    <TextareaAutosize
-                        onChange={handleChange}
-                        value={markdownContent}
-                        className="textbox py-3 px-2 min-h-[300px] w-full bg-[#333] border-2  hover:border-[#666] text-lg focus:outline-none"
-                        placeholder="Start typing your Markdown here..."
-                    />
+                    // <TextareaAutosize
+                    //     onChange={handleChange}
+                    //     value={markdownContent}
+                    //     className="textbox py-3 px-2 min-h-[300px] w-full bg-[#333] border-2  hover:border-[#666] text-lg focus:outline-none"
+                    //     placeholder="Start typing your Markdown here..."
+                    // />
+                    <ReactQuill className='w-full min-h-[300px]' theme="snow" value={markdownContent} onChange={handleChange} />
                 )}
             </div>
         </div>
