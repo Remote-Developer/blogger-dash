@@ -3,7 +3,20 @@ import { Toaster } from 'react-hot-toast'
 import TextareaAutosize from "react-textarea-autosize";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
+const  modules  = {
+    toolbar: [
+        [{ font: [] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ color: [] }, { background: [] }],
+        [{ script:  "sub" }, { script:  "super" }],
+        ["blockquote", "code-block"],
+        [{ list:  "ordered" }, { list:  "bullet" }],
+        [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
+        ["link", "image", "video"],
+        ["clean"],
+    ],
+};
 interface PropsTypes {
     setMarkdownContent: (arg0: string) => void;
     markdownContent: string;
@@ -44,7 +57,7 @@ const BlogWrightInput = ({ markdownContent,
                     //     className="textbox py-3 px-2 min-h-[300px] w-full bg-[#333] border-2  hover:border-[#666] text-lg focus:outline-none"
                     //     placeholder="Start typing your Markdown here..."
                     // />
-                    <ReactQuill className='w-full min-h-[300px]' theme="snow" value={markdownContent} onChange={handleChange} />
+                    <ReactQuill className='w-full min-h-[300px]' modules={modules} theme="snow"  value={markdownContent} onChange={handleChange} />
                 )}
             </div>
         </div>
