@@ -1,7 +1,7 @@
 import axios from "@/lib/axios";
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import toast, { Renderable, Toaster } from 'react-hot-toast';
+import toast, {  Toaster } from 'react-hot-toast';
 import TextareaAutosize from "react-textarea-autosize";
 
 interface PropsTypes {
@@ -71,8 +71,6 @@ export default function MarkdownTextarea({
           },
         }
       );
-
-
 
     } else {
       toast.error("Please input data")
